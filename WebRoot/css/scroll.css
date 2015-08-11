@@ -1,0 +1,23 @@
+/*focus*/
+.focus {height:445px;overflow:hidden;position:relative;background:#fff;min-width: 1200px}
+.focus_m ul {width:100%;height:445px;overflow:hidden;}
+.focus_m li {width:100%;height:445px;_float:left;}
+.focus_m li.li_1 {background:url(../images/examd1.png) center 0 no-repeat #fff;}
+.focus_m li.li_2 {background:url(../images/2.jpg) center 0 no-repeat #76b7d8;}
+.focus_m li.li_3 {background:url(../images/3.jpg) center 0 no-repeat #bb3838;}
+/**此处可以把#fff换成和大图相似颜色**/
+.focus_s {height:0;position:relative;margin:0 auto;z-index:2;width:1000px;}
+.focus_s ul {height:12px;overflow:hidden;position:absolute;left:500px;top:400px;}
+.focus_s li {float:left;cursor:pointer;height:12px;width:30px;overflow:hidden;margin-right:10px;}
+.focus_s li b {display:block;text-indent:-999em;background:url(../images/circle.png) 0 0 no-repeat;width:12px;height:32px;overflow:hidden;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='images/circle.png');_background:none;}
+.focus_s li.active b {margin-top:-20px;}
+.focus_l,.focus_r {position:absolute;display:block;width:72px;height:72px;overflow:hidden;z-index:2;top:150px;}
+.focus_l {left:50px;}
+.focus_r {right:50px;}
+.focus_l b{position:absolute;z-index:1;display:block;width:72px;height:72px;overflow:hidden;background:#222222;opacity:0.5;filter:alpha(opacity=50);cursor:pointer;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius:5px;}
+.focus_r b {position:absolute;z-index:1;display:block;width:72px;height:72px;overflow:hidden;background:#222222;opacity:0.5;filter:alpha(opacity=50);cursor:pointer;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius:5px;}
+.focus_l span,.focus_r span {display:block;position:relative;z-index:2;width:24px;height:38px;top:18px;cursor:pointer;}
+.focus_l span {left:22px;background:url(../images/l.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='images/l.png');_background:none;}
+.focus_r span {left:26px;background:url(../images/r.png) 0 0 no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=noscale, src='images/r.png');_background:none;}
+.focus_l:hover,.focus_r:hover {*zoom:1;}
+.focus_l:hover b,.focus_r:hover b {opacity:0.5;filter:alpha(opacity=50);}

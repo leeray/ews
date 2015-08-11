@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/com/ewa/bean/WorksBean.java=UTF-8
+encoding//src/com/ewa/db/Client.java=UTF-8
+encoding//src/com/ewa/db/ConnectionPool.java=UTF-8
+encoding//src/com/ewa/db/ConnectionPoolManager.java=UTF-8
+encoding//src/com/ewa/db/DBInitInfo.java=UTF-8
+encoding//src/com/ewa/db/DBbean.java=UTF-8
+encoding//src/com/ewa/db/IConnectionPool.java=UTF-8
+encoding/<project>=UTF-8

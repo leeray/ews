@@ -9,7 +9,7 @@ import java.util.Properties;
 public class DBInitInfo {
 	public  static List<DBbean>  beans = null;  
 	private static String driver = "com.mysql.jdbc.Driver";  
-	private static String url = "jdbc:mysql://127.0.0.1:3306/ews";  
+	private static String url = "jdbc:mysql://127.0.0.1:3306/ews?autoReconnect=true";  
 	private static String username ="root";  
 	private static String password = ""; 
     static{  
@@ -27,7 +27,8 @@ public class DBInitInfo {
 			password = p.getProperty("password");
 		} catch (IOException e) {
 			e.printStackTrace();
-		}  
+		}
+        System.out.println("url:" + url);
         
         DBbean beanOracle = new DBbean();  
         beanOracle.setDriverName(driver);  

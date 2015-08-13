@@ -29,6 +29,12 @@
     <servlet-name>Customer</servlet-name>
     <servlet-class>com.ewa.servlet.Customer</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>MobileWorks</servlet-name>
+    <servlet-class>com.ewa.servlet.mobile.Works</servlet-class>
+  </servlet>
 
   <filter>  
     <filter-name>ChineseFilter</filter-name>  
@@ -55,9 +61,15 @@
     <servlet-name>Customer</servlet-name>
     <url-pattern>/servlet/Customer</url-pattern>
   </servlet-mapping>
+  
+  
   <servlet-mapping>
     <servlet-name>MobileUser</servlet-name>
     <url-pattern>/servlet/mobile/User</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MobileWorks</servlet-name>
+    <url-pattern>/servlet/mobile/Works</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>

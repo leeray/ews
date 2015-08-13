@@ -75,13 +75,6 @@ public class User extends HttpServlet {
 		}
 		
 		if (userBean1 != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("userid", userBean1.getId());
-			session.setAttribute("userBean", userBean1);
-			
-			RequestDispatcher rd=request.getRequestDispatcher("/servlet/Works?howdo=list");  
-	        rd.forward(request,response);
-	       
 	        try {
 		        JSONObject memberjson=new JSONObject();
 		        memberjson.put("id", userBean1.getId());

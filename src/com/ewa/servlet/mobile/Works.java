@@ -27,6 +27,11 @@ import com.ewa.util.ErrorInfo;
 public class Works extends HttpServlet {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Constructor of the object.
 	 */
 	public Works() {
@@ -114,16 +119,16 @@ public class Works extends HttpServlet {
 						result = false;
 					} else {
 						result = worksDao.addWorks(
-								Integer.valueOf(customerid), 
+								Integer.valueOf(customerid).intValue(), 
 								customerBean.getName(), 
-								Integer.valueOf(userid), 
+								Integer.valueOf(userid).intValue(), 
 								userBean1.getName(), 
 								level, 
 								describe, 
-								Integer.valueOf(isphonecall), 
+								Integer.valueOf(isphonecall).intValue(), 
 								phonenumber, 
 								solution, 
-								Integer.valueOf(isclosed),
+								Integer.valueOf(isclosed).intValue(),
 								erjidanwei,
 								kehulianxiren,
 								lianxifangshi,
@@ -152,7 +157,7 @@ public class Works extends HttpServlet {
 			
 			WorksBean worksBean = null;
 			
-			int id = Integer.valueOf(request.getParameter("id"));
+			int id = Integer.valueOf(request.getParameter("id")).intValue();
 			
 			try {
 				worksBean = worksDao.getWorksById(id);
@@ -166,7 +171,7 @@ public class Works extends HttpServlet {
 			return;
 			
 		} else if (howdo.equals("update")) {
-			int id = Integer.valueOf(request.getParameter("id"));
+			int id = Integer.valueOf(request.getParameter("id")).intValue();
 			String customerid = request.getParameter("customerid");
 			String level = request.getParameter("level");
 			String describe = request.getParameter("describe");
@@ -208,16 +213,16 @@ public class Works extends HttpServlet {
 					result = false;
 				} else {
 					result = worksDao.updateWorks(id, 
-							Integer.valueOf(customerid), 
+							Integer.valueOf(customerid).intValue(), 
 							customerBean.getName(), 
 							userBean1.getId(), 
 							userBean1.getName(), 
 							level, 
 							describe, 
-							Integer.valueOf(isphonecall), 
+							Integer.valueOf(isphonecall).intValue(), 
 							phonenumber, 
 							solution, 
-							Integer.valueOf(isclosed), 
+							Integer.valueOf(isclosed).intValue(), 
 							newcontent,
 							erjidanwei,
 							kehulianxiren,
@@ -225,8 +230,8 @@ public class Works extends HttpServlet {
 							lianximail);
 					
 					// 更改关闭字段了， 就要把问题父列和子列的关闭字段都改一下
-					if (worksBean.getIsclosed() != Integer.valueOf(isclosed)) {
-						worksDao.updateWorksClosedField(id, Integer.valueOf(isclosed));
+					if (worksBean.getIsclosed() != Integer.valueOf(isclosed).intValue()) {
+						worksDao.updateWorksClosedField(id, Integer.valueOf(isclosed).intValue());
 					}
 				}
 				
@@ -258,7 +263,7 @@ public class Works extends HttpServlet {
 			
 			WorksBean worksBean = null;
 			
-			int id = Integer.valueOf(request.getParameter("id"));
+			int id = Integer.valueOf(request.getParameter("id")).intValue();
 			
 			try {
 				worksBean = worksDao.getWorksById(id);

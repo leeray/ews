@@ -4,74 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name></display-name>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>User</servlet-name>
-    <servlet-class>com.ewa.servlet.User</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>MobileUser</servlet-name>
-    <servlet-class>com.ewa.servlet.mobile.User</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Works</servlet-name>
-    <servlet-class>com.ewa.servlet.Works</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Customer</servlet-name>
-    <servlet-class>com.ewa.servlet.Customer</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>MobileWorks</servlet-name>
-    <servlet-class>com.ewa.servlet.mobile.Works</servlet-class>
-  </servlet>
-
-  <filter>  
-    <filter-name>ChineseFilter</filter-name>  
-    <filter-class>com.ewa.util.ChineseFilter</filter-class>  
-    <init-param>  
-        <param-name>encoding</param-name>  
-        <param-value>UTF-8</param-value>  
-    </init-param>  
-  </filter>  
-  <filter-mapping>  
-    <filter-name>ChineseFilter</filter-name>  
-    <url-pattern>/*</url-pattern>  
-  </filter-mapping> 
-
-  <servlet-mapping>
-    <servlet-name>User</servlet-name>
-    <url-pattern>/servlet/User</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Works</servlet-name>
-    <url-pattern>/servlet/Works</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Customer</servlet-name>
-    <url-pattern>/servlet/Customer</url-pattern>
-  </servlet-mapping>
-  
-  
-  <servlet-mapping>
-    <servlet-name>MobileUser</servlet-name>
-    <url-pattern>/servlet/mobile/User</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>MobileWorks</servlet-name>
-    <url-pattern>/servlet/mobile/Works</url-pattern>
-  </servlet-mapping>	
+  <display-name></display-name>	
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

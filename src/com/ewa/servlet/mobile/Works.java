@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import com.ewa.bean.CustomerBean;
 import com.ewa.bean.UserBean;
@@ -74,6 +75,12 @@ public class Works extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String userid = request.getParameter("userid");
+		if (userid==null || userid.isEmpty()) {
+			errorInfo(401, "用户验证失败，请重新登录", request, response); 
+	        return;
+		}
+		
 		String howdo = request.getParameter("mode");
 		
 		if (howdo.equals("add")) {
@@ -89,7 +96,7 @@ public class Works extends HttpServlet {
 			String kehulianxiren = request.getParameter("kehulianxiren");
 			String lianxifangshi = request.getParameter("lianxifangshi");
 			String lianximail = request.getParameter("lianximail");
-			String userid = request.getParameter("userid");
+			
 			if (customerid==null || level==null || isphonecall==null || isclosed==null || customerid.isEmpty() || level.isEmpty() || isphonecall.isEmpty() || isclosed.isEmpty()) {
 		        errorInfo(501, "字段不能为空", request, response); 
 		        return;
@@ -144,7 +151,7 @@ public class Works extends HttpServlet {
 				errorInfo(200, "增加工作纪要成功", request, response);
 				return;
 			} else {
-				errorInfo(401, "增加工作纪要失败", request, response); 
+				errorInfo(501, "增加工作纪要失败", request, response); 
 		        return;
 			}
 		} else if (howdo.equals("list")) {
@@ -184,7 +191,6 @@ public class Works extends HttpServlet {
 			String kehulianxiren = request.getParameter("kehulianxiren");
 			String lianxifangshi = request.getParameter("lianxifangshi");
 			String lianximail = request.getParameter("lianximail");
-			String userid = request.getParameter("userid");
 			if (customerid==null || level==null || isphonecall==null || isclosed==null || customerid.isEmpty() || level.isEmpty() || isphonecall.isEmpty() || isclosed.isEmpty()) {
 				errorInfo(501, "字段不能为空", request, response); 
 		        return;
@@ -251,7 +257,7 @@ public class Works extends HttpServlet {
 			String id = request.getParameter("id");
 			
 			if (id==null || id.isEmpty()) {
-				errorInfo(501, "查看失败", request, response); 
+				errorInfo(501, "查看失败, 无效的ID", request, response); 
 		        return;
 			}
 			
@@ -268,7 +274,7 @@ public class Works extends HttpServlet {
 			try {
 				worksBean = worksDao.getWorksById(id);
 			} catch (Exception e) {
-				errorInfo(401, "查询出错", request, response); 
+				errorInfo(501, "查询出错", request, response); 
 		        return;
 			}
 			
@@ -438,7 +444,8 @@ public class Works extends HttpServlet {
 		try{
 			JSONObject memberjson1=new JSONObject();
 			memberjson1.put("count", worksBeanList.size());
-			merberjson1.
+			
+			JSONArray resultArray = new JSONArray();
 			
 			for (WorksBean worksBean : worksBeanList) {
 			    JSONObject memberjson =new JSONObject();
@@ -460,11 +467,15 @@ public class Works extends HttpServlet {
 		        memberjson.put("kehulianxiren", worksBean.getKehulianxiren());
 		        memberjson.put("lianxifangshi", worksBean.getLianxifangshi());
 		        memberjson.put("contactmail", worksBean.getLianximail());
+		        
+		        resultArray.put(memberjson);
 			}
+			
+			memberjson1.put("result", resultArray);
 	    	
 	        JSONObject json=new JSONObject();
 			json.put("status", 200);
-			json.put("data", memberjson);
+			json.put("data", memberjson1);
 			
 			response.getOutputStream().write(json.toString().getBytes("UTF-8"));
 			response.setContentType("text/json; charset=UTF-8");
@@ -479,7 +490,7 @@ public class Works extends HttpServlet {
 	}
 	
 	private void forwordWorksList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pageSize = 25;
+		int pageSize = 10;
 		int pageNum = 1;
 		try {
 			pageSize = Integer.valueOf(request.getParameter("pageSize"));
@@ -493,26 +504,12 @@ public class Works extends HttpServlet {
 	}
 	
 	private void forwordWorksList(int pageSize, int pageNum, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
-		UserBean userBean = (UserBean)session.getAttribute("userBean");
-		
-		if (userBean == null) {
-	        return;
-		}
-		
-		int userid = userBean.getId();
-		int priv = userBean.getPriv();
+		String userid = request.getParameter("userid");
 		
 		int pageCount = 0;
 		
 		WorksDAO worksDao = new WorksDAO();
-		
-		if (priv == 0) {
-			pageCount = worksDao.getAllWorksCount();
-		} else {
-			pageCount = worksDao.getAllWorksCount(userid);
-		}
 		
 		if ((pageCount / pageSize) < pageNum) {
 			pageNum = ((pageCount % pageSize)==0)?(pageCount/pageSize):(pageCount/pageSize+1);
@@ -521,30 +518,15 @@ public class Works extends HttpServlet {
 		if (pageCount <= 0) pageCount = 0;
 		if (pageNum <= 0) pageNum = 1;
 		
-		List<WorksBean> customerList = null;
-		if (priv == 0) {
-			customerList = worksDao.getAllWorks((pageNum-1)*pageSize, pageSize);
-		} else {
-			customerList = worksDao.getAllWorks(userid, (pageNum-1)*pageSize, pageSize);
-		}
-		request.setAttribute("WorksList", customerList);
+		List<WorksBean> worksList = null;
+		worksList = worksDao.getAllWorks(Integer.valueOf(userid), (pageNum-1)*pageSize, pageSize);
 		
-		int pageAll = 0;
-		if ((pageCount % pageSize) == 0) {
-			pageAll = (pageCount / pageSize);
-		} else {
-			pageAll = (pageCount / pageSize) + 1;
-		}
-		request.setAttribute("pageAll", pageAll);
-		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("pageSize", pageSize);
-		request.setAttribute("pageNum", pageNum);
+		outBean(worksList, request, response);
 		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 	
 	private void forwordWorksHistoryList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pageSize = 25;
+		int pageSize = 10;
 		int pageNum = 1;
 		try {
 			pageSize = Integer.valueOf(request.getParameter("pageSize"));
@@ -556,6 +538,7 @@ public class Works extends HttpServlet {
 	}
 	
 	private void forwordWorksHistoryList(int pageSize, int pageNum, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		WorksDAO worksDao = new WorksDAO();
 		
 		int pageCount = worksDao.getWorksHistoryCount(Integer.valueOf(request.getParameter("id")));
@@ -567,21 +550,10 @@ public class Works extends HttpServlet {
 		if (pageCount <= 0) pageCount = 0;
 		if (pageNum <= 0) pageNum = 1;
 		
-		List<WorksBean> customerList = worksDao.getWorksHistory(Integer.valueOf(request.getParameter("id")));
-		request.setAttribute("WorksList", customerList);
+		List<WorksBean> worksList = worksDao.getWorksHistory(Integer.valueOf(request.getParameter("id")));
 		
-		int pageAll = 0;
-		if ((pageCount % pageSize) == 0) {
-			pageAll = (pageCount / pageSize);
-		} else {
-			pageAll = (pageCount / pageSize) + 1;
-		}
-		request.setAttribute("pageAll", pageAll);
-		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("pageSize", pageSize);
-		request.setAttribute("pageNum", pageNum);
+		outBean(worksList, request, response);
 		
-		request.getRequestDispatcher("/historyEvents.jsp").forward(request, response);
 	}
 
 }

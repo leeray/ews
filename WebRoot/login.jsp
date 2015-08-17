@@ -76,7 +76,7 @@ if (action !=null && action.equals("logout")) {
 							</tr>
 							<tr>
 								<td>
-                                                        <input type="hidden" name="howdo" value="login" />
+                                    <input type="hidden" name="howdo" value="login" />
 									<div >
 										<input type="text" class="loginInput1" name="username" 
 											value="账号名" onfocus="javascript:if(this.value=='账号名')this.value='';" />

@@ -59,6 +59,7 @@ List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute(
 				<%
 				} else {
 				%>
+					当前用户: <%=userBean.getName() %>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}

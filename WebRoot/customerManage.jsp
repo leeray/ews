@@ -66,6 +66,7 @@ int pageAll = (Integer)request.getAttribute("pageAll");
 				<%
 				} else {
 				%>
+					当前用户: <%=userBean.getName() %>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}

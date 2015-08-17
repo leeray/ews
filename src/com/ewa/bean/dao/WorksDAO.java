@@ -382,6 +382,44 @@ public class WorksDAO {
 		return null;
 	}
 	
+	public WorksBean getLastWorksById(int id) throws SQLException{
+		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
+		
+		String sql = "select id,customerid,customername,userid,username,`level`,`describe`,isphonecall,phonecallnumber,solution,isclosed,createtime,closetime,newcontent,erjidanwei,kehulianxiren,lianxifangshi,lianximail from works where id = " + id + " or fid = " + id + " order by id desc limit 1";
+		try { 
+			statement = (Statement)conn.createStatement();
+			rs = statement.executeQuery(sql);
+			
+			if (rs.next()) { 
+				WorksBean worksBean = new WorksBean();  
+				worksBean.setId(rs.getInt("id"));  
+				worksBean.setCustomerid(rs.getInt("customerid"));
+				worksBean.setCustomername(rs.getString("customername"));
+				worksBean.setUserid(rs.getInt("userid"));
+				worksBean.setUsername(rs.getString("username"));
+				worksBean.setLevel(rs.getString("level"));    
+				worksBean.setDescribe(rs.getString("describe"));    
+				worksBean.setIsphonecall(rs.getBoolean("isphonecall"));  
+				worksBean.setPhonecallnumber(rs.getString("phonecallnumber"));  
+				worksBean.setSolution(rs.getString("solution")); 
+				worksBean.setIsclosed(rs.getInt("isclosed"));
+				worksBean.setCreatedate(rs.getDate("createtime"));
+				worksBean.setClosedate(rs.getDate("closetime"));
+				worksBean.setNewcontent(rs.getString("newcontent"));
+				worksBean.setErjidanwei(rs.getString("erjidanwei"));
+				worksBean.setKehulianxiren(rs.getString("kehulianxiren"));
+				worksBean.setLianxifangshi(rs.getString("lianxifangshi"));
+				worksBean.setLianximail(rs.getString("lianximail"));
+				return worksBean;
+			}   
+		} catch (Exception e) {
+			e.printStackTrace();  
+		} finally {
+			ConnectionPoolManager.getInstance().close("testPool", conn);
+		}   
+		return null;
+	}
+	
 	public boolean delWorksById(int id) {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		

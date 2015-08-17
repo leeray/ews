@@ -70,8 +70,19 @@ alert('<%=errorInfo.getDetailMessage() %>');
 			<div class="headermright vText" style=" float: right">
 				<div style="font-size:12px">您好！欢迎您来到工程师工作纪要</div>
 				<div style="margin-top: 20px">
-					<a href="/login.jsp" target="_blank">登陆</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
-						href="/login.jsp?action=logout">退出</a>
+				<% 
+				UserBean userBean = (UserBean)session.getAttribute("userBean");
+				if (userBean == null) {
+				%>
+					<a href="/login.jsp" target="_blank">登陆</a>
+				<%
+				} else {
+				%>
+					当前用户: <%=userBean.getName() %>, &nbsp;
+					<a href="/login.jsp?action=logout">退出</a>
+				<% 
+				}
+				%>
 				</div>
 			</div>
 		</div>

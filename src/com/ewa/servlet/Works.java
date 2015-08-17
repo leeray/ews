@@ -214,7 +214,7 @@ public class Works extends HttpServlet {
 			int id = Integer.valueOf(request.getParameter("id"));
 			
 			try {
-				worksBean = worksDao.getWorksById(id);
+				worksBean = worksDao.getLastWorksById(id);
 			} catch (Exception e) {
 				ErrorInfo errorInfo = new ErrorInfo();
 				errorInfo.setDetailMessage("查询出错");
@@ -227,6 +227,7 @@ public class Works extends HttpServlet {
 		        return;
 			}
 			
+			request.setAttribute("fid", id);
 			request.setAttribute("worksBean", worksBean);
 			RequestDispatcher rd=request.getRequestDispatcher("/updateEvents.jsp");  
 	        rd.forward(request,response);

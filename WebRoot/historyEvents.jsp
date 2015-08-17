@@ -38,6 +38,7 @@
 				<%
 				} else {
 				%>
+					当前用户: <%=userBean.getName() %>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}
@@ -92,7 +93,7 @@
 					<th scope="col">800 case号码</th>
 					<th scope="col">是否关闭</th>
 					<th scope="col">时间</th>
-					<th scope="col" width="200px">操作</th>
+					<th scope="col" width="120px">操作</th>
 
 				</tr>
 				<%
@@ -112,7 +113,7 @@
 					<td><%=works.getCreatedate() %></td>
 					<td>
 						<div class="operBtn" style="width:80px" onclick="pageHref('/servlet/Works?howdo=view&id=<%=works.getId()%>')">查看</div>
-						<div class="operBtn" onclick="pageHref('/servlet/Works?howdo=edit&id=<%=works.getId()%>')">编辑</div>
+						<!-- div class="operBtn" onclick="pageHref('/servlet/Works?howdo=edit&id=<%=works.getId()%>')">编辑</div -->
 					</td>
 				</tr>
 				<%

@@ -61,6 +61,7 @@ if (worksBean == null) {
 				<%
 				} else {
 				%>
+					当前用户: <%=userBean.getName() %>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}
@@ -89,33 +90,33 @@ if (worksBean == null) {
 		<div class="addContentDiv">
 		<form action="/servlet/Works" id="formId" method="post">
 			<input type="hidden" name="howdo" value="update" />
-			<input type="hidden" name="id" value="<%=worksBean.getId()%>" />
+			<input type="hidden" name="id" value="<%=request.getAttribute("fid")%>" />
 			<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="180px" align="right">客户:</td>
 					<td>
-					<select name="customerid" id="" class="addSelect fl">
+					<select name="customerid" id="" class="addSelect fl" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;">
 						<option value="<%=worksBean.getCustomerid() %>"><%=worksBean.getCustomername() %></option>
 					</select></td>
 				</tr>
 				<tr>
 					<td align="right">二级单位:</td>
-					<td><input type="text" name="erjidanwei" id="" class="addInput fl" value="<%=worksBean.getErjidanwei() %>"/>
+					<td><input type="text" name="erjidanwei" id="" class="addInput fl" value="<%=worksBean.getErjidanwei() %>"  readonly/>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">客户联系人:</td>
-					<td><input type="text" name="kehulianxiren" id="" class="addInput fl" value="<%=worksBean.getKehulianxiren() %>"/>
+					<td><input type="text" name="kehulianxiren" id="" class="addInput fl" value="<%=worksBean.getKehulianxiren() %>"  readonly/>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">联系方式:</td>
-					<td><input type="text" name="lianxifangshi" id="" class="addInput fl" value="<%=worksBean.getLianxifangshi() %>"/>
+					<td><input type="text" name="lianxifangshi" id="" class="addInput fl" value="<%=worksBean.getLianxifangshi() %>"  readonly/>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">联系邮箱:</td>
-					<td><input type="text" name="lianximail" id="" class="addInput fl" value="<%=worksBean.getLianximail() %>"/>
+					<td><input type="text" name="lianximail" id="" class="addInput fl" value="<%=worksBean.getLianximail() %>"  readonly/>
 					</td>
 				</tr>
 				
@@ -123,16 +124,16 @@ if (worksBean == null) {
 					<td align="right">事件属性:</td>
 					<td>
 						<select name="level" id="" class="addSelect fl">
-							<option value="一级问题" <% if (worksBean.getLevel().equals("一级问题")) { %> select="true" <% } %>>一级问题</option>
-							<option value="二级问题" <% if (worksBean.getLevel().equals("二级问题")) { %> select="true" <% } %>>二级问题</option>
-							<option value="普通问题" <% if (worksBean.getLevel().equals("普通问题")) { %> select="true" <% } %>>普通问题</option>
-							<option value="技术咨询" <% if (worksBean.getLevel().equals("技术咨询")) { %> select="true" <% } %>>技术咨询</option>
+							<option value="一级问题" <% if (worksBean.getLevel().equals("一级问题")) { %> selected="true" <% } %>>一级问题</option>
+							<option value="二级问题" <% if (worksBean.getLevel().equals("二级问题")) { %> selected="true" <% } %>>二级问题</option>
+							<option value="普通问题" <% if (worksBean.getLevel().equals("普通问题")) { %> selected="true" <% } %>>普通问题</option>
+							<option value="技术咨询" <% if (worksBean.getLevel().equals("技术咨询")) { %> selected="true" <% } %>>技术咨询</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">事件描述(1000字以内):</td>
-					<td><textarea name="describe" id="" class="addArea fl"><%=worksBean.getDescribe() %></textarea>
+					<td><textarea name="describe" id="" class="addArea fl" readonly><%=worksBean.getDescribe() %></textarea>
 					</td>
 				</tr>
 				
@@ -148,7 +149,7 @@ if (worksBean == null) {
 				</tr>
 				<tr>
 					<td align="right">解决办法(1000字以内):</td>
-					<td><textarea name="solution" id="" class="addArea fl"><%=worksBean.getSolution() %></textarea>
+					<td><textarea name="solution" id="" class="addArea fl" readonly><%=worksBean.getSolution() %></textarea>
 					</td>
 				</tr>
 				<tr>

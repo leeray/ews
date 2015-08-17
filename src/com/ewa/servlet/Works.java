@@ -525,9 +525,9 @@ public class Works extends HttpServlet {
 		
 		List<WorksBean> customerList = null;
 		if (priv == 0) {
-			customerList = worksDao.getAllWorks((pageNum-1)*pageSize, pageSize);
+			customerList = worksDao.getAllWorksGroup((pageNum-1)*pageSize, pageSize);
 		} else {
-			customerList = worksDao.getAllWorks(userid, (pageNum-1)*pageSize, pageSize);
+			customerList = worksDao.getAllWorksGroup(userid, (pageNum-1)*pageSize, pageSize);
 		}
 		request.setAttribute("WorksList", customerList);
 		

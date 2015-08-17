@@ -38,7 +38,7 @@
 				<%
 				} else {
 				%>
-					当前用户: <%=userBean.getName() %>, &nbsp;
+					<font class="fontsong17">当前用户</font>: <font class="fontsong14"><%=userBean.getName() %></font>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}
@@ -69,12 +69,8 @@
 		
 		<div class="titleDiv">工作历史统计</div>
 		
-		<div class="titleLineDiv">
-			
-		</div>
+		<div class="titleLineDiv"></div>
 		
-		<div class="addContentDiv">
-		<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 		<%
 		int pageNum = (Integer)request.getAttribute("pageNum");
 		int pageCount = (Integer)request.getAttribute("pageCount");
@@ -86,11 +82,9 @@
 		
 		for (WorksBean worksBean : workList) {
 		%>
-
-				<tr>
-					<td width="120px" align="right">客户:</td>
-					<td><span style="margin-left: 20px"><%=worksBean.getCustomername() %></span></td>
-				</tr>
+		<div class="statEventsDiv">
+		<div class="statEventsTitle">客户：<%=worksBean.getCustomername() %></div>
+		<table class="statEventsTable" border="0" cellspacing="0" cellpadding="0">	
 				<tr>
 					<td width="120px" align="right">读取账号:</td>
 					<td><span style="margin-left: 20px"><%=worksBean.getUsername() %></span></td>
@@ -153,14 +147,14 @@
 				<tr>
 					<td colspan="2" style="border-bottom:1px dashed #000000"></td>
 				</tr>
+		
+		</table>
+		</div>
 		<%
 		}
 		%>
-		</table>
-		</div>
-
 		<!-- end .container -->
 	</div>
-
+	<%@ include file="foot.jsp"%>
 </body>
 </html>

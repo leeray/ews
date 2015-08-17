@@ -78,7 +78,7 @@ alert('<%=errorInfo.getDetailMessage() %>');
 				<%
 				} else {
 				%>
-					当前用户: <%=userBean.getName() %>, &nbsp;
+					<font class="fontsong17">当前用户</font>: <font class="fontsong14"><%=userBean.getName() %></font>, &nbsp;
 					<a href="/login.jsp?action=logout">退出</a>
 				<% 
 				}
@@ -122,9 +122,9 @@ alert('<%=errorInfo.getDetailMessage() %>');
 								<td><select id="selectUser" class="muSelect" multiple="multiple" size="20">
 								<%
 								List<UserBean> userList = (ArrayList<UserBean>)request.getAttribute("UserList");
-								for (UserBean userBean : userList) {
+								for (UserBean userBean1 : userList) {
 								%>
-									<option value="<%=userBean.getId()%>"><%=userBean.getName() %></option>
+									<option value="<%=userBean1.getId()%>"><%=userBean1.getName() %></option>
 								<%
 								}
 								%>

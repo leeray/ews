@@ -67,7 +67,7 @@ if (action !=null && action.equals("logout")) {
 						<img src="/images/logint1.png" />
 					</div>
 					<div class="loginDiv2">
-				       	 <form action="/servlet/User" id="formId">
+				       	 <form action="/servlet/User" id="formId" method="post">
                                                  <table width="325" border="0" cellspacing="0" cellpadding="0"
 							class="registerTable">
 							<tr>

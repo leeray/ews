@@ -99,6 +99,45 @@ public class WorksDAO {
 		return workList;
 	}
 	
+	public List<WorksBean> getAllWorksGroup(int start, int count) {
+		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
+		
+		List<WorksBean> workList = new ArrayList<WorksBean>();
+		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = B.id  order by A.createtime desc limit "+start+","+count;
+		try { 
+			statement = (Statement)conn.createStatement();
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) { 
+				WorksBean worksBean = new WorksBean();  
+				worksBean.setId(rs.getInt("id"));  
+				worksBean.setCustomerid(rs.getInt("customerid"));
+				worksBean.setCustomername(rs.getString("customername"));
+				worksBean.setUserid(rs.getInt("userid"));
+				worksBean.setUsername(rs.getString("username"));
+				worksBean.setLevel(rs.getString("level"));    
+				worksBean.setDescribe(rs.getString("describe"));    
+				worksBean.setIsphonecall(rs.getBoolean("isphonecall"));  
+				worksBean.setPhonecallnumber(rs.getString("phonecallnumber"));  
+				worksBean.setSolution(rs.getString("solution")); 
+				worksBean.setIsclosed(rs.getInt("isclosed"));
+				worksBean.setCreatedate(rs.getDate("createtime"));
+				worksBean.setClosedate(rs.getDate("closetime"));
+				worksBean.setNewcontent(rs.getString("newcontent"));
+				worksBean.setErjidanwei(rs.getString("erjidanwei"));
+				worksBean.setKehulianxiren(rs.getString("kehulianxiren"));
+				worksBean.setLianxifangshi(rs.getString("lianxifangshi"));
+				worksBean.setLianximail(rs.getString("lianximail"));
+				workList.add(worksBean);
+			}   
+		} catch (Exception e) {
+			e.printStackTrace();  
+		} finally {
+			ConnectionPoolManager.getInstance().close("testPool", conn);
+		}   
+		return workList;
+	}
+	
 	public int getAllWorksCount() {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		String sql = "select count(*) from works where fid = 0 ";
@@ -122,6 +161,45 @@ public class WorksDAO {
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
 		String sql = "select id,customerid,customername,userid,username,`level`,`describe`,isphonecall,phonecallnumber,solution,isclosed,createtime,closetime,newcontent,erjidanwei,kehulianxiren,lianxifangshi,lianximail from works where fid = 0 and userid= "+ userid+" order by createtime desc limit "+start+","+count;
+		try { 
+			statement = (Statement)conn.createStatement();
+			rs = statement.executeQuery(sql);
+			
+			while (rs.next()) { 
+				WorksBean worksBean = new WorksBean();  
+				worksBean.setId(rs.getInt("id"));  
+				worksBean.setCustomerid(rs.getInt("customerid"));
+				worksBean.setCustomername(rs.getString("customername"));
+				worksBean.setUserid(rs.getInt("userid"));
+				worksBean.setUsername(rs.getString("username"));
+				worksBean.setLevel(rs.getString("level"));    
+				worksBean.setDescribe(rs.getString("describe"));    
+				worksBean.setIsphonecall(rs.getBoolean("isphonecall"));  
+				worksBean.setPhonecallnumber(rs.getString("phonecallnumber"));  
+				worksBean.setSolution(rs.getString("solution")); 
+				worksBean.setIsclosed(rs.getInt("isclosed"));
+				worksBean.setCreatedate(rs.getDate("createtime"));
+				worksBean.setClosedate(rs.getDate("closetime"));
+				worksBean.setNewcontent(rs.getString("newcontent"));
+				worksBean.setErjidanwei(rs.getString("erjidanwei"));
+				worksBean.setKehulianxiren(rs.getString("kehulianxiren"));
+				worksBean.setLianxifangshi(rs.getString("lianxifangshi"));
+				worksBean.setLianximail(rs.getString("lianximail"));
+				workList.add(worksBean);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();  
+		} finally {
+			ConnectionPoolManager.getInstance().close("testPool", conn);
+		}   
+		return workList;
+	}
+	
+	public List<WorksBean> getAllWorksGroup(int userid, int start, int count) {
+		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
+		
+		List<WorksBean> workList = new ArrayList<WorksBean>();
+		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = b.id and A.userid= "+ userid+" order by A.createtime desc limit "+start+","+count;
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);

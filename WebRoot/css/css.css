@@ -301,6 +301,12 @@ a:hover,a:active,a:focus {
 	font-family: '宋体';
 }
 
+.fontsong17 {
+	color: #333333;
+	font-size: 17px;
+	font-family: '宋体';
+}
+
 .fontsong18 {
 	color: #333333;
 	font-size: 18px;
@@ -923,5 +929,29 @@ td {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+}
+
+.statEventsDiv {
+	width: 1080px;
+	margin: 0px auto;
+	text-align: center;
+	margin-top: 50px;
+	border: 1px solid #d5d5d5;
+	background: #ffffff;
+}
+
+.statEventsTable {
+	text-align: left;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.statEventsTitle {
+	margin-left: 50px;
+	text-align: left;
+	font-weight: bold;
+	font-family: '微软雅黑';
+	font-size: 16px;
+	line-height: 50px
 }
 

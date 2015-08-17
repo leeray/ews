@@ -103,7 +103,7 @@ public class WorksDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = B.id  order by A.createtime desc limit "+start+","+count;
+		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = B.id  order by A.createtime,A.id desc limit "+start+","+count;
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -199,7 +199,7 @@ public class WorksDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = b.id and A.userid= "+ userid+" order by A.createtime desc limit "+start+","+count;
+		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = b.id and A.userid= "+ userid+" order by A.createtime, A.id desc limit "+start+","+count;
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);

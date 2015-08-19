@@ -144,9 +144,6 @@
 					<td align="right">创建时间:</td>
 					<td><span style="margin-left: 20px"><% if(worksBean.getCreatedate() != null) { %> <%=worksBean.getCreatedate() %> <%}%></span></td>
 				</tr>
-				<tr>
-					<td colspan="2" style="border-bottom:1px dashed #000000"></td>
-				</tr>
 		
 		</table>
 		</div>

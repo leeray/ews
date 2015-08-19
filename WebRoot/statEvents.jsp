@@ -39,7 +39,7 @@
 				} else {
 				%>
 					<font class="fontsong17">当前用户</font>: <font class="fontsong14"><%=userBean.getName() %></font>, &nbsp;
-					<a href="/login.jsp?action=logout">退出</a>
+					<font class="fontsong17"><a href="/login.jsp?action=logout">退出</a></font>
 				<% 
 				}
 				%>

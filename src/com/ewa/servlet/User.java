@@ -122,6 +122,63 @@ public class User extends HttpServlet {
 	        return;
 		}
 		
+		if (howdo.equals("password")) {
+			request.setAttribute("userBean", userBean);
+			RequestDispatcher rd=request.getRequestDispatcher("/updatePassword.jsp");  
+	        rd.forward(request,response);
+	        return;
+		} else if (howdo.equals("updatePwd")) {
+			int id = userBean.getId();
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			String confirPassword = request.getParameter("confirPassword");
+			//String describe = request.getParameter("describe");
+			if (password==null || confirPassword==null || password.isEmpty() || confirPassword.isEmpty()) {
+				
+				ErrorInfo errorInfo = new ErrorInfo();
+				errorInfo.setDetailMessage("字段不能为空");
+				
+				request.setAttribute("ErrorInfo", errorInfo);
+				
+				RequestDispatcher rd=request.getRequestDispatcher("/servlet/User?howdo=password");  
+		        rd.forward(request,response);
+		        
+		        return;
+			}
+			
+			if (!password.equalsIgnoreCase(confirPassword)) {
+				
+				ErrorInfo errorInfo = new ErrorInfo();
+				errorInfo.setDetailMessage("密码不相同");
+				
+				request.setAttribute("ErrorInfo", errorInfo);
+				
+				RequestDispatcher rd=request.getRequestDispatcher("/servlet/User?howdo=password");  
+		        rd.forward(request,response);
+
+		        return;
+			}
+			
+			UserDAO userDao = new UserDAO();
+			if (userDao.updateUser(id, username, password, "", new java.sql.Date(new java.util.Date().getTime()))) {
+				
+				RequestDispatcher rd=request.getRequestDispatcher("/servlet/Works?howdo=list");  
+		        rd.forward(request,response);
+				
+				return;
+			} else {
+				ErrorInfo errorInfo = new ErrorInfo();
+				errorInfo.setDetailMessage("修改用户失败");
+				
+				request.setAttribute("ErrorInfo", errorInfo);
+				
+				RequestDispatcher rd=request.getRequestDispatcher("/servlet/User?howdo=password");  
+		        rd.forward(request,response);
+		        
+		        return;
+			}
+		}
+		
 		if (userBean.getPriv() != 0) {
 			ErrorInfo errorInfo = new ErrorInfo();
 			errorInfo.setDetailMessage("你没有权限管理账号");

@@ -103,7 +103,8 @@ public class WorksDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = B.id  order by A.createtime,A.id desc limit "+start+","+count;
+		String sql = "select C.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (SELECT D.id fid, ifnull(max(B.id), D.id) sid from works B right join (SELECT * FROM `works` where fid = 0) D on D.id = B.fid group by fid) C on C.sid = A.id and A.isclosed!=1 order by A.id desc limit "+start+","+count;
+		System.out.println("getAllWorksGroup sql :" + sql);
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -140,7 +141,7 @@ public class WorksDAO {
 	
 	public int getAllWorksCount() {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
-		String sql = "select count(*) from works where fid = 0 ";
+		String sql = "select count(*) from works where fid = 0 and isclosed!=1 ";
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -199,7 +200,8 @@ public class WorksDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select A.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (select max(id) as id from works where fid!=0 group by fid) B on A.id = b.id and A.userid= "+ userid+" order by A.createtime, A.id desc limit "+start+","+count;
+		String sql = "select C.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (SELECT D.id fid, ifnull(max(B.id), D.id) sid from works B right join (SELECT * FROM `works` where fid = 0) D on D.id = B.fid group by fid) C on C.sid = A.id and A.userid= "+ userid+" and A.isclosed!=1 order by A.id desc limit "+start+","+count;
+		System.out.println("getAllWorksGroup sql :" + sql);
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -236,7 +238,7 @@ public class WorksDAO {
 	
 	public int getAllWorksCount(int userid) {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
-		String sql = "select count(*) from works where fid = 0 and userid= "+ userid+"  order by createtime desc";
+		String sql = "select count(*) from works where fid = 0 and isclosed!=1 and userid= "+ userid+"  order by createtime desc";
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -311,37 +313,38 @@ public class WorksDAO {
 	
 	public List<WorksBean> findWorks(String userid, String username, String customername, String isclosed, String createdate, String closedate, int start, int count) throws SQLException{
 		
-		String where = "fid=0";
+		String where = "1 = 1";
 		
 		if (userid != null && !userid.isEmpty()) {
-			where += " and userid = " + userid;
+			where += " and A.userid = " + userid;
 		}
 		
 		if (customername!=null && !customername.isEmpty() ) {
-			where += " and customername like '%" + customername + "%' ";
+			where += " and A.customername like '%" + customername + "%' ";
 		}
 		
 		if (username!=null && !username.isEmpty() ) {
-			where += " and username like '%" + username +"%' ";
+			where += " and A.username like '%" + username +"%' ";
 		}
 		
 		if (createdate != null) {
-			where += " and createtime = '" + createdate + "'";
+			where += " and A.createtime = '" + createdate + "'";
 		}
 		
 		if (closedate != null) {
-			where += " and closetime = '" + closedate + "'";
+			where += " and A.closetime = '" + closedate + "'";
 		}
 		
 		if (isclosed != null && !isclosed.isEmpty()) {
 			int close = Integer.valueOf(isclosed);
-			where += " and isclosed = " + close;
+			where += " and A.isclosed = " + close;
 		}
 		
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select id,customerid,customername,userid,username,level,`describe`,isphonecall,phonecallnumber,solution,isclosed,createtime,closetime, newcontent,erjidanwei,kehulianxiren,lianxifangshi,lianximail from works where "+ where +" order by createtime desc limit "+start+","+count;
+		String sql = "select C.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (SELECT D.id fid, ifnull(max(B.id), D.id) sid from works B right join (SELECT * FROM `works` where fid = 0) D on D.id = B.fid group by fid) C on C.sid = A.id and "+ where +" order by A.id desc limit "+start+","+count;
+		System.out.println("findWorks sql : " + sql);
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);

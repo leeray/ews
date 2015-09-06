@@ -387,13 +387,14 @@ public class Works extends HttpServlet {
 			}
 			String userid = null;
 			if (userBean.getPriv() == 1) {
-				username = userBean.getName();
+				//username = userBean.getName();
 				userid = Integer.toString(userBean.getId());
-			} else {
-				if (username!=null && (username.equals("用户") || username.equals(""))) {
-					username = null;
-				}
 			}
+			
+			if (username!=null && (username.equals("用户") || username.equals(""))) {
+				username = null;
+			}
+			
 			if (isclosed!=null && (isclosed.equals("事件状态") || isclosed.equals(""))) {
 				isclosed = null;
 			}

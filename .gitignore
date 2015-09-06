@@ -1,7 +1,5 @@
 
 *.class
-<<<<<<< HEAD
-=======
+/WebRoot/org/apache
+/WebRoot/WEB-INF/classes/com/
 
-*.class
->>>>>>> origin/master

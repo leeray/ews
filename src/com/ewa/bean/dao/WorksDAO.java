@@ -200,7 +200,7 @@ public class WorksDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<WorksBean> workList = new ArrayList<WorksBean>();
-		String sql = "select C.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (SELECT D.id fid, ifnull(max(B.id), D.id) sid from works B right join (SELECT * FROM `works` where fid = 0) D on D.id = B.fid group by fid) C on C.sid = A.id and A.userid= "+ userid+" and A.isclosed!=1 order by A.id desc limit "+start+","+count;
+		String sql = "select C.fid as id,A.customerid,A.customername,A.userid,A.username,A.`level`,A.`describe`,A.isphonecall,A.phonecallnumber,A.solution,A.isclosed,A.createtime,A.closetime,A.newcontent,A.erjidanwei,A.kehulianxiren,A.lianxifangshi,A.lianximail from works A inner join (SELECT D.id fid, ifnull(max(B.id), D.id) sid from works B right join (SELECT * FROM `works` where fid = 0) D on D.id = B.fid group by fid) C on C.sid = A.id and A.customerid in (select US.customerid from user_customer US where US.userid = "+userid+") and A.isclosed!=1 order by A.id desc limit "+start+","+count;
 		System.out.println("getAllWorksGroup sql :" + sql);
 		try { 
 			statement = (Statement)conn.createStatement();
@@ -238,7 +238,7 @@ public class WorksDAO {
 	
 	public int getAllWorksCount(int userid) {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
-		String sql = "select count(*) from works where fid = 0 and isclosed!=1 and userid= "+ userid+"  order by createtime desc";
+		String sql = "select count(*) from works where fid = 0 and isclosed!=1 and customerid in (select US.customerid from user_customer US where US.userid = "+userid+") order by createtime desc";
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -316,7 +316,8 @@ public class WorksDAO {
 		String where = "1 = 1";
 		
 		if (userid != null && !userid.isEmpty()) {
-			where += " and A.userid = " + userid;
+			// where += " and A.userid = " + userid;
+			where += " and A.customerid in (select US.customerid from user_customer US where US.userid = "+userid+")";
 		}
 		
 		if (customername!=null && !customername.isEmpty() ) {
@@ -384,7 +385,9 @@ public class WorksDAO {
 		String where = "fid=0";
 		
 		if (userid != null && !userid.isEmpty()) {
-			where += " and userid = " + userid;
+			// where += " and userid = " + userid;
+			// 这里是要搜索用户下关联的客户下所有资料。 以客户为权限。 
+			where += " and customerid in (select US.customerid from user_customer US where US.userid = "+userid+")";
 		}
 		
 		if (customername!=null && !customername.isEmpty() ) {
@@ -410,6 +413,7 @@ public class WorksDAO {
 		
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		String sql = "select count(*) from works where "+ where;
+		System.out.println("findWorksCount sql : " + sql);
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);

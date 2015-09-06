@@ -73,7 +73,7 @@ if (userBean1 == null) {
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li><a href="/servlet/Works?howdo=list">工作纪要</a></li>
+					<li><a href="/servlet/Works?howdo=list">修改密码</a></li>
 					<%
 					if (sessionUser!=null && sessionUser.getPriv() == 0) {
 					%>
@@ -85,8 +85,8 @@ if (userBean1 == null) {
 				</ul>
 			</div>
 		</div>
-		<div class="titleDiv">修改密码</div>
-		<div class="titleLineDiv"></div>
+		<!-- div class="titleDiv">修改密码</div -->
+		<!-- div class="titleLineDiv"></div -->
 		<div class="addContentDiv">
 		<form action="/servlet/User" id="formId">
 			<input type="hidden" name="howdo" value="updatePwd" />

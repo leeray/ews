@@ -3,3 +3,9 @@
 /WebRoot/org/apache
 /WebRoot/WEB-INF/classes/com/
 
+
+*.class
+
+WebRoot/WEB-INF/classes/com/ewa/bean/dao/WorksDAO.class
+
+WebRoot/WEB-INF/classes/com/ewa/servlet/Works.class

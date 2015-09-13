@@ -9,3 +9,13 @@
 WebRoot/WEB-INF/classes/com/ewa/bean/dao/WorksDAO.class
 
 WebRoot/WEB-INF/classes/com/ewa/servlet/Works.class
+
+WebRoot/org/apache/jsp/addCustomer_jsp.class
+
+WebRoot/org/apache/jsp/addCustomer_jsp.class
+
+WebRoot/org/apache/jsp/addCustomer_jsp.class
+
+WebRoot/org/apache/jsp/addCustomer_jsp.class
+
+*.class

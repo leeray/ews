@@ -69,11 +69,11 @@ String username = (String)request.getAttribute("username");
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li><a href="/servlet/Works?howdo=list">工作纪要</a>
+					<li><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a>
 					</li>
-					<li><a href="/servlet/Customer?howdo=list">客户管理</a>
+					<li><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a>
 					</li>
-					<li class="navcurrent"><a href="/servlet/User?howdo=list">帐号管理</a>
+					<li class="navcurrent"><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a>
 					</li>
 				</ul>
 			</div>
@@ -120,7 +120,14 @@ String username = (String)request.getAttribute("username");
 				<tr>
 					<td><%=i++ %></td>
 					<td><%=user.getName() %></td>
-					<td><%=user.getDescribe() %></td>
+					<td>
+					<%
+					if (user.getDescribe().length() >= 30) {
+						out.println(user.getDescribe().substring(0, 30) + "...");
+					} else {
+						out.println(user.getDescribe());
+					} 
+					%></td>
 					<td>
 						<div class="operBtn" onclick="pageHref('/servlet/User?howdo=edit&id=<%=user.getId()%>')">编辑</div>
 						<div class="operBtn" onclick="pageHref('/servlet/User?howdo=del&id=<%=user.getId()%>')">删除</div>

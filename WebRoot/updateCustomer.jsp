@@ -54,9 +54,21 @@ alert('<%=errorInfo.getDetailMessage() %>');
 <script type="text/javascript">
 	$(document).ready(function () {
     	$("#btnClicked").click(function () {
-			$("#selectedUser").children("option").each(function(){  
+    		if($("#customername").val()==""){
+				alert("客户名称不可以为空!");
+				return;
+			}
+			var selected = $("#selectedUser").find("option");
+			if (selected.length <= 0) {
+				alert("请为客户选择账号!");
+				return;
+			}
+			
+			$("#selectedUser").find("option").attr("selected",true);
+    	
+			/* $("#selectedUser").children("option").each(function(){  
 				$(this).attr("selected","true");  
-			});
+			}); */
     	
     		$("#formId").submit();
     		return;
@@ -99,11 +111,11 @@ if (customerBean == null) {
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li><a href="/servlet/Works?howdo=list">工作纪要</a>
+					<li><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a>
 					</li>
-					<li class="navcurrent"><a href="/servlet/Customer?howdo=list">客户管理</a>
+					<li class="navcurrent"><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a>
 					</li>
-					<li><a href="/servlet/User?howdo=list">帐号管理</a>
+					<li><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a>
 					</li>
 				</ul>
 			</div>
@@ -111,14 +123,14 @@ if (customerBean == null) {
 		<div class="titleDiv">客户修改</div>
 		<div class="titleLineDiv"></div>
 		<div class="addContentDiv">
-		<form action="/servlet/Customer" id="formId">
+		<form action="/servlet/Customer" id="formId" method="post">
 			<input type="hidden" name="howdo" value="update" />
 			<input type="hidden" name="id" value="<%=customerBean.getId() %>" />
 			<table class="addContentTable" border="0" cellspacing="0"
 				cellpadding="0">
 				<tr>
 					<td width="120px" align="right">客户:</td>
-					<td><input type="text" name="customername" id="" class="addInput fl" value="<%=customerBean.getName() %>" />
+					<td><input type="text" name="customername" id="customername" class="addInput fl" value="<%=customerBean.getName() %>" />
 					</td>
 				</tr>
 				<tr>

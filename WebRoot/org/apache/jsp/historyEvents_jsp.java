@@ -61,7 +61,6 @@ public final class historyEvents_jsp extends org.apache.jasper.runtime.HttpJspBa
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write('\r');
       out.write('\n');
       out.write('\r');
       out.write('\n');
@@ -70,82 +69,84 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
 
       out.write("\r\n");
       out.write("\r\n");
-      out.write('\r');
       out.write('\n');
 
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE html>\r\n");
-      out.write("<html>\r\n");
-      out.write("<head>\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("<head>\n");
       out.write("<base href=\"");
       out.print(basePath);
-      out.write("\">\r\n");
-      out.write("\r\n");
-      out.write("<title>工程师工作纪要</title>\r\n");
-      out.write("<meta http-equiv=\"pragma\" content=\"no-cache\">\r\n");
-      out.write("<meta http-equiv=\"cache-control\" content=\"no-cache\">\r\n");
-      out.write("<meta http-equiv=\"expires\" content=\"0\">\r\n");
-      out.write("<meta http-equiv=\"keywords\" content=\"keyword1,keyword2,keyword3\">\r\n");
-      out.write("<meta http-equiv=\"description\" content=\"This is my page\">\r\n");
-      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/css.css\" />\r\n");
-      out.write("\t<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>\r\n");
-      out.write("\t<script type=\"text/javascript\" src=\"js/common.js\"></script>\r\n");
-      out.write("</head>\r\n");
-      out.write("\r\n");
-      out.write("<body>\r\n");
-      out.write("\t<div class=\"container\">\r\n");
-      out.write("\t\t<div class=\"header headermiddle\">\r\n");
-      out.write("\t\t\t<div class=\"headermleft\"></div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t<div class=\"headermright vText\" style=\" float: right\">\r\n");
-      out.write("\t\t\t\t<div style=\"font-size:12px\">您好！欢迎您来到工程师工作纪要</div>\r\n");
-      out.write("\t\t\t\t<div style=\"margin-top: 20px\">\r\n");
+      out.write("\">\n");
+      out.write("\n");
+      out.write("<title>工程师工作纪要</title>\n");
+      out.write("<meta http-equiv=\"pragma\" content=\"no-cache\">\n");
+      out.write("<meta http-equiv=\"cache-control\" content=\"no-cache\">\n");
+      out.write("<meta http-equiv=\"expires\" content=\"0\">\n");
+      out.write("<meta http-equiv=\"keywords\" content=\"keyword1,keyword2,keyword3\">\n");
+      out.write("<meta http-equiv=\"description\" content=\"This is my page\">\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/css.css\" />\n");
+      out.write("\t<script type=\"text/javascript\" src=\"js/jquery.min.js\"></script>\n");
+      out.write("\t<script type=\"text/javascript\" src=\"js/common.js\"></script>\n");
+      out.write("</head>\n");
+      out.write("\n");
+      out.write("<body>\n");
+      out.write("\t<div class=\"container\">\n");
+      out.write("\t\t<div class=\"header headermiddle\">\n");
+      out.write("\t\t\t<div class=\"headermleft\"></div>\n");
+      out.write("\n");
+      out.write("\t\t\t<div class=\"headermright vText\" style=\" float: right\">\n");
+      out.write("\t\t\t\t<div style=\"font-size:12px\">您好！欢迎您来到工程师工作纪要</div>\n");
+      out.write("\t\t\t\t<div style=\"margin-top: 20px\">\n");
       out.write("\t\t\t\t");
  
 				UserBean userBean = (UserBean)session.getAttribute("userBean");
 				if (userBean == null) {
 				
-      out.write("\r\n");
-      out.write("\t\t\t\t\t<a href=\"/login.jsp\" target=\"_blank\">登陆</a>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t\t<a href=\"/login.jsp\" target=\"_blank\">登陆</a>\n");
       out.write("\t\t\t\t");
 
 				} else {
 				
-      out.write("\r\n");
-      out.write("\t\t\t\t\t<a href=\"/login.jsp?action=logout\">退出</a>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t\t<font class=\"fontsong17\">当前用户</font>: <font class=\"fontsong14\">");
+      out.print(userBean.getName() );
+      out.write("</font>, &nbsp;\n");
+      out.write("\t\t\t\t\t<font class=\"fontsong17\"><a href=\"/login.jsp?action=logout\">退出</a></font>\n");
       out.write("\t\t\t\t");
  
 				}
 				
-      out.write("\r\n");
-      out.write("\t\t\t\t</div>\r\n");
-      out.write("\t\t\t</div>\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\t\t<!-- 导航 -->\r\n");
-      out.write("\t\t<div class=\" headernav\">\r\n");
-      out.write("\t\t\t<div class=\" nav\">\r\n");
-      out.write("\t\t\t\t<ul>\r\n");
-      out.write("\t\t\t\t\t<li class=\"navcurrent\"><a href=\"/servlet/Works?howdo=list\">工作纪要</a></li>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t</div>\n");
+      out.write("\t\t\t</div>\n");
+      out.write("\t\t</div>\n");
+      out.write("\t\t<!-- 导航 -->\n");
+      out.write("\t\t<div class=\" headernav\">\n");
+      out.write("\t\t\t<div class=\" nav\">\n");
+      out.write("\t\t\t\t<ul>\n");
+      out.write("\t\t\t\t\t<li class=\"navcurrent\"><a href=\"/servlet/Works?howdo=list\">工作纪要</a></li>\n");
       out.write("\t\t\t\t\t");
 
 					if (sessionUser!=null && sessionUser.getPriv() == 0) {
 					
-      out.write("\r\n");
-      out.write("\t\t\t\t\t<li><a href=\"/servlet/Customer?howdo=list\">客户管理</a></li>\r\n");
-      out.write("\t\t\t\t\t<li><a href=\"/servlet/User?howdo=list\">帐号管理</a></li>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t\t<li><a href=\"/servlet/Customer?howdo=list\">客户管理</a></li>\n");
+      out.write("\t\t\t\t\t<li><a href=\"/servlet/User?howdo=list\">帐号管理</a></li>\n");
       out.write("\t\t\t\t\t");
 
 					}
 					
-      out.write("\r\n");
-      out.write("\t\t\t\t</ul>\r\n");
-      out.write("\t\t\t</div>\r\n");
-      out.write("\t\t</div>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t</ul>\n");
+      out.write("\t\t\t</div>\n");
+      out.write("\t\t</div>\n");
       out.write("\t\t");
 
 		int pageNum = (Integer)request.getAttribute("pageNum");
@@ -153,39 +154,39 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
 		int pageSize = (Integer)request.getAttribute("pageSize");
 		int pageAll = (Integer)request.getAttribute("pageAll");
 		
-      out.write("\r\n");
-      out.write("\t\t<div class=\"searchDiv\">\r\n");
+      out.write("\n");
+      out.write("\t\t<div class=\"searchDiv\">\n");
       out.write("\t\t\t<div class=\"divBtn ml10 fl mt10\" onclick=\"pageHref('/servlet/Works?howdo=stat&id=");
       out.print(request.getAttribute("id"));
-      out.write("')\">统计</div>\r\n");
-      out.write("\t\t\t<div class=\"divBtn ml10 fl mt10\" onclick=\"window.history.back(-1);\">返回</div>\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\t\t<div class=\"forPageTop\">\r\n");
+      out.write("')\">统计</div>\n");
+      out.write("\t\t\t<div class=\"divBtn ml10 fl mt10\" onclick=\"window.history.back(-1);\">返回</div>\n");
+      out.write("\t\t</div>\n");
+      out.write("\t\t<div class=\"forPageTop\">\n");
       out.write("\t\t\t共 <span style=\"color:#120eb8\">");
       out.print(pageCount );
-      out.write("</span> 条&nbsp;&nbsp; <!-- 每页 <select\r\n");
-      out.write("\t\t\t\tname=\"\" style=\"width:45px\"><option value=\"25\">25</option>\r\n");
-      out.write("\t\t\t\t<option value=\"50\">50</option>\r\n");
-      out.write("\t\t\t\t<option value=\"100\">100</option>\r\n");
-      out.write("\t\t\t</select> 条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n");
-      out.write("\t\t\t -->\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t<div class=\"rTableDiv\">\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t<table class=\"rinTb\" width=\"100%\" border=\"0\" cellspacing=\"0\"\r\n");
-      out.write("\t\t\t\tcellpadding=\"0\">\r\n");
-      out.write("\t\t\t\t<tr class=\"rinTbH\">\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">ID</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">客户</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">事件属性</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">是否转800</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">800 case号码</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">是否关闭</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\">时间</th>\r\n");
-      out.write("\t\t\t\t\t<th scope=\"col\" width=\"200px\">操作</th>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t</tr>\r\n");
+      out.write("</span> 条&nbsp;&nbsp; <!-- 每页 <select\n");
+      out.write("\t\t\t\tname=\"\" style=\"width:45px\"><option value=\"25\">25</option>\n");
+      out.write("\t\t\t\t<option value=\"50\">50</option>\n");
+      out.write("\t\t\t\t<option value=\"100\">100</option>\n");
+      out.write("\t\t\t</select> 条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n");
+      out.write("\t\t\t -->\n");
+      out.write("\t\t</div>\n");
+      out.write("\n");
+      out.write("\t\t<div class=\"rTableDiv\">\n");
+      out.write("\n");
+      out.write("\t\t\t<table class=\"rinTb\" width=\"100%\" border=\"0\" cellspacing=\"0\"\n");
+      out.write("\t\t\t\tcellpadding=\"0\">\n");
+      out.write("\t\t\t\t<tr class=\"rinTbH\">\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">ID</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">客户</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">事件属性</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">是否转800</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">800 case号码</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">是否关闭</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\">时间</th>\n");
+      out.write("\t\t\t\t\t<th scope=\"col\" width=\"120px\">操作</th>\n");
+      out.write("\n");
+      out.write("\t\t\t\t</tr>\n");
       out.write("\t\t\t\t");
 
 				List<WorksBean> workList = (ArrayList<WorksBean>)request.getAttribute("WorksList");
@@ -194,17 +195,17 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
 				
 				for (WorksBean works : workList) {
 				
-      out.write("\r\n");
-      out.write("\t\t\t\t<tr>\r\n");
+      out.write("\n");
+      out.write("\t\t\t\t<tr>\n");
       out.write("\t\t\t\t\t<td>");
       out.print(i++ );
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
       out.print(works.getCustomername() );
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
       out.print(works.getLevel() );
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
  if (works.isIsphonecall()) { 
       out.write('是');
@@ -213,10 +214,10 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
       out.write(' ');
       out.write('否');
 } 
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
       out.print(works.getPhonecallnumber() );
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
  if (works.getIsclosed() == 1) { 
       out.write('关');
@@ -227,59 +228,59 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
       out.write('开');
       out.write('启');
 } 
-      out.write("</td>\r\n");
+      out.write("</td>\n");
       out.write("\t\t\t\t\t<td>");
       out.print(works.getCreatedate() );
-      out.write("</td>\r\n");
-      out.write("\t\t\t\t\t<td>\r\n");
+      out.write("</td>\n");
+      out.write("\t\t\t\t\t<td>\n");
       out.write("\t\t\t\t\t\t<div class=\"operBtn\" style=\"width:80px\" onclick=\"pageHref('/servlet/Works?howdo=view&id=");
       out.print(works.getId());
-      out.write("')\">查看</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"operBtn\" onclick=\"pageHref('/servlet/Works?howdo=edit&id=");
+      out.write("')\">查看</div>\n");
+      out.write("\t\t\t\t\t\t<!-- div class=\"operBtn\" onclick=\"pageHref('/servlet/Works?howdo=edit&id=");
       out.print(works.getId());
-      out.write("')\">编辑</div>\r\n");
-      out.write("\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t</tr>\r\n");
+      out.write("')\">编辑</div -->\n");
+      out.write("\t\t\t\t\t</td>\n");
+      out.write("\t\t\t\t</tr>\n");
       out.write("\t\t\t\t");
 
 				}
 				
-      out.write("\r\n");
-      out.write("\t\t\t</table>\r\n");
-      out.write("\t\t\t<!-- div class=\"forPage\">\r\n");
+      out.write("\n");
+      out.write("\t\t\t</table>\n");
+      out.write("\t\t\t<!-- div class=\"forPage\">\n");
       out.write("\t\t\t\t共 <span style=\"color:#120eb8\">");
       out.print(pageAll);
-      out.write("</span> 页&nbsp;&nbsp; 当前第 <span\r\n");
+      out.write("</span> 页&nbsp;&nbsp; 当前第 <span\n");
       out.write("\t\t\t\t\tstyle=\"color:#120eb8\">");
       out.print(pageNum);
       out.write("</span> 页 <a href=\"/servlet/Works?howdo=history&pageNum=1&pageSize=");
       out.print( pageSize );
       out.write("&pageCount=");
       out.print( pageCount );
-      out.write("\">&nbsp;&nbsp;&nbsp;&nbsp;首页</a>&nbsp;\r\n");
+      out.write("\">&nbsp;&nbsp;&nbsp;&nbsp;首页</a>&nbsp;\n");
       out.write("\t\t\t\t<a href=\"/servlet/Works?howdo=history&pageNum=");
       out.print( pageNum-1 );
       out.write("&pageSize=");
       out.print( pageSize );
       out.write("&pageCount=");
       out.print( pageCount );
-      out.write("\">上一页</a> &nbsp;\r\n");
+      out.write("\">上一页</a> &nbsp;\n");
       out.write("\t\t\t\t<a href=\"/servlet/Works?howdo=history&pageNum=");
       out.print( pageNum+1 );
       out.write("&pageSize=");
       out.print( pageSize );
       out.write("&pageCount=");
       out.print( pageCount );
-      out.write("\">下一页</a>&nbsp;\r\n");
+      out.write("\">下一页</a>&nbsp;\n");
       out.write("\t\t\t\t<a href=\"/servlet/Works?howdo=history&pageNum=");
       out.print( pageCount );
       out.write("&pageSize=");
       out.print( pageSize );
       out.write("&pageCount=");
       out.print( pageCount );
-      out.write("\">末页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n");
-      out.write("\t\t\t</div -->\r\n");
-      out.write("\t\t</div>\r\n");
+      out.write("\">末页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n");
+      out.write("\t\t\t</div -->\n");
+      out.write("\t\t</div>\n");
       out.write("\t\t");
       out.write("\r\n");
       out.write("\r\n");
@@ -309,12 +310,12 @@ UserBean sessionUser = (UserBean)session.getAttribute("userBean");
       out.write("\t</div>\r\n");
       out.write("</body>\r\n");
       out.write("</html>\r\n");
-      out.write("\r\n");
-      out.write("\t\t<!-- end .container -->\r\n");
-      out.write("\t</div>\r\n");
-      out.write("\r\n");
-      out.write("</body>\r\n");
-      out.write("</html>\r\n");
+      out.write("\n");
+      out.write("\t\t<!-- end .container -->\n");
+      out.write("\t</div>\n");
+      out.write("\n");
+      out.write("</body>\n");
+      out.write("</html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

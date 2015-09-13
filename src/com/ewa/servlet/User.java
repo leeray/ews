@@ -475,13 +475,30 @@ public class User extends HttpServlet {
 	}
 	
 	private void forwordUserList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		HttpSession session = request.getSession();
 		int pageSize = 25;
-		int pageNum = 1;
+		
 		try {
 			pageSize = Integer.valueOf(request.getParameter("pageSize"));
-			pageNum = Integer.valueOf(request.getParameter("pageNum"));
+			session.setAttribute("UserPageSize", pageSize);
 		} catch (Exception e) {
-			
+			try {
+				pageSize = Integer.valueOf(session.getAttribute("UserPageSize").toString());
+			} catch(Exception e1) {
+				pageSize = 25;
+			}
+		}
+		
+		int pageNum = 1;
+		try {
+			pageNum = Integer.valueOf(request.getParameter("pageNum"));
+			session.setAttribute("UserPageNum", pageNum);
+		} catch (Exception e) {
+			try {
+				pageNum = Integer.valueOf(session.getAttribute("UserPageNum").toString());
+			} catch(Exception e1) {
+				pageNum = 1;
+			}
 		}
 		
 		if (pageNum <= 0) pageNum = 1;

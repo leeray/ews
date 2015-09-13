@@ -95,12 +95,12 @@ int pageAll = (Integer)request.getAttribute("pageAll");
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li class="navcurrent"><a href="/servlet/Works?howdo=list">工作纪要</a></li>
+					<li class="navcurrent"><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a></li>
 					<%
 					if (sessionUser!=null && sessionUser.getPriv() == 0) {
 					%>
-					<li><a href="/servlet/Customer?howdo=list">客户管理</a></li>
-					<li><a href="/servlet/User?howdo=list">帐号管理</a></li>
+					<li><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a></li>
+					<li><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a></li>
 					<%
 					}
 					%>

@@ -33,11 +33,67 @@ alert('<%=errorInfo.getDetailMessage() %>');
 <script type="text/javascript">
 $(document).ready(function () {
    	$("#btnClicked").click(function () {
+   		if($("#erjidanwei").val()=="") {
+			alert("二级单位不可以为空!");
+			return;
+		}
+		
+   		if($("#kehulianxiren").val()==""){
+			alert("客户联系人不可以为空!");
+			return;
+		}
+		
+		var reg = /^(1[0-9]{1}[0-9]{1})+\d{8}$/;
+		var v = $("#lianxifangshi").val();
+		if(v=="") {
+			alert("联系方式不能为空!");
+			return;
+		}
+		if(!reg.test(v)) {
+			alert("联系方式格式错误!");
+			return;
+		}
+		
+		var lianxi_reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+		var lianxi = $("#lianximail").val();
+		if(lianxi=="") {
+			alert("联系邮箱不能为空!");
+			return;
+		}
+		if(!lianxi_reg.test(lianxi)) {
+			alert("联系邮箱格式错误!");
+			return;
+		}
+		
+		if($("#describe").val()=="") {
+			alert("事件描述不能为空!");
+			return;
+		}
+		if($("#describe").val().length > 1000) {
+			alert("事件描述超出1000字!");
+			return;
+		}
+		
+		if($("#phonenumber").val()=="" || isNaN($("#phonenumber").val()) || $("#phonenumber").val().length > 20) {
+			alert("800CASE号码不能为空，或者格式错误!");
+			return;
+		}
+		
+		if($("#solution").val()=="") {
+			alert("解决办法不能为空!");
+			return;
+		}
+
+		if($("#solution").val().length > 1000) {
+			alert("解决办法超出1000字!");
+			return;
+		}
+
    		$("#formId").submit();
    		return;
    	});
 
-})
+});
 </script>
 </head>
 <%
@@ -71,12 +127,12 @@ List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute(
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li class="navcurrent"><a href="/servlet/Works?howdo=list">工作纪要</a></li>
+					<li class="navcurrent"><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a></li>
 					<%
 					if (sessionUser!=null && sessionUser.getPriv() == 0) {
 					%>
-					<li><a href="/servlet/Customer?howdo=list">客户管理</a></li>
-					<li><a href="/servlet/User?howdo=list">帐号管理</a></li>
+					<li><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a></li>
+					<li><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a></li>
 					<%
 					}
 					%>
@@ -106,19 +162,19 @@ List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute(
 				</tr>
 				<tr>
 					<td align="right">二级单位:</td>
-					<td><input type="text" name="erjidanwei" id="" class="addInput fl"/></td>
+					<td><input id="erjidanwei" type="text" name="erjidanwei" class="addInput fl"/></td>
 				</tr>
 				<tr>
 					<td align="right">客户联系人:</td>
-					<td><input type="text" name="kehulianxiren" id="" class="addInput fl"/></td>
+					<td><input id="kehulianxiren" type="text" name="kehulianxiren" class="addInput fl"/></td>
 				</tr>
 				<tr>
 					<td align="right">联系方式:</td>
-					<td><input type="text" name="lianxifangshi" id="" class="addInput fl"/></td>
+					<td><input id="lianxifangshi" type="text" name="lianxifangshi" class="addInput fl"/></td>
 				</tr>
 				<tr>
 					<td align="right">联系邮箱:</td>
-					<td><input type="text" name="lianximail" id="" class="addInput fl"/></td>
+					<td><input type="text" name="lianximail" id="lianximail" class="addInput fl"/></td>
 				</tr>
 				<tr>
 					<td align="right">事件属性:</td>
@@ -133,7 +189,7 @@ List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute(
 				</tr>
 				<tr>
 					<td align="right">事件描述(1000字以内):</td>
-					<td><textarea name="describe" id="" class="addArea fl"></textarea></td>
+					<td><textarea name="describe" id="describe" class="addArea fl"></textarea></td>
 				</tr>
 				<tr>
 					<td align="right">是否转800:</td>
@@ -144,11 +200,11 @@ List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute(
 				</tr>
 				<tr>
 					<td align="right">800 CASE号码:</td>
-					<td><input type="text" name="phonenumber" id="" class="addInput fl" /></td>
+					<td><input type="text" name="phonenumber" id="phonenumber" class="addInput fl" /></td>
 				</tr>
 				<tr>
 					<td align="right">解决办法(1000字以内):</td>
-					<td><textarea name="solution" id="" class="addArea fl"></textarea></td>
+					<td><textarea name="solution" id="solution" class="addArea fl"></textarea></td>
 				</tr>
 				<tr>
 					<td align="right">是否关闭:</td>

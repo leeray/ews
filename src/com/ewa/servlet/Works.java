@@ -542,17 +542,37 @@ public class Works extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("isclosed", "0");
 		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 	
 	private void forwordWorksList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		int pageSize = 25;
-		int pageNum = 1;
+		
 		try {
 			pageSize = Integer.valueOf(request.getParameter("pageSize"));
+			session.setAttribute("UserPageSize", pageSize);
+		} catch (Exception e) {
+			try {
+				pageSize = Integer.valueOf(session.getAttribute("UserPageSize").toString());
+			} catch(Exception e1) {
+				pageSize = 25;
+			}
+		}
+		
+		int pageNum = 1;
+		try {
 			pageNum = Integer.valueOf(request.getParameter("pageNum"));
-		} catch (Exception e) {}
+			session.setAttribute("UserPageNum", pageNum);
+		} catch (Exception e) {
+			try {
+				pageNum = Integer.valueOf(session.getAttribute("UserPageNum").toString());
+			} catch(Exception e1) {
+				pageNum = 1;
+			}
+		}
 		
 		if (pageNum <= 0) pageNum = 1;
 		

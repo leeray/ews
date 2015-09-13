@@ -22,24 +22,43 @@
 	<script type="text/javascript">
 	$(document).ready(function () {
     	$("#btnClicked").click(function () {
+    		if($("#username").val()=="") {
+				alert("账号不能为空!");
+				return;
+			}
+			
+			if(!(/^[A-Za-z0-9_-]+$/.test($("#username").val()))) {
+				alert("账号只能包含大写字母、小写字母和数字!");
+				return;
+			}
+	
+			if($("#username").val().length > 20) {
+				alert("账号超出20字!");
+				return;
+			}
+			
+			if($("#password").val()=="") {
+				alert("密码不能为空!");
+				return;
+			}
+	
+			if($("#password").val().length > 20 || $("#password").val().length < 6) {
+				alert("密码长度在6-20位之间!");
+				return;
+			}
+			
+			if($("#confirPassword").val()!=$("#password").val()) {
+				alert("两个密码不匹配!");
+				return;
+			}
+	
+			if($("#describe").val().length > 200) {
+				alert("描述超过200字!");
+				return;
+			}
+    	
     		$("#formId").submit();
     		return;
-        	$('#btnClicked').submitForm({
-            	url: "/servlet/user",
-            	dataType: "text",
-            	callback: function (data) {
-                	endFileUpload();
-                	data = eval("(" + data + ")");
-                	alert(data.Content);
-                	if (data.Result > 0) {
-                   		location.href = data.Redirect;
-                	}
-            	},
-            	before: function () {
-                	startFileUpload();
-                	var errMsg = "";
-            	}
-        	}).submit();
     	});
 
 	})
@@ -105,33 +124,33 @@ if (userBean.getPriv() != 0) {
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li><a href="/servlet/Works?howdo=list">工作纪要</a></li>
-					<li><a href="/servlet/Customer?howdo=list">客户管理</a></li>
-					<li  class="navcurrent"><a href="/servlet/User?howdo=list">帐号管理</a></li>
+					<li><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a></li>
+					<li><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a></li>
+					<li  class="navcurrent"><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="titleDiv">帐号添加</div>
 		<div class="titleLineDiv"></div>
 		<div class="addContentDiv">
-		<form action="/servlet/User" id="formId">
+		<form action="/servlet/User" id="formId" method="post">
 			<input type="hidden" name="howdo" value="add" />
 			<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="120px" align="right">账号:</td>
-					<td><input type="text" name="username" id="" class="addInput fl" /></td>
+					<td><input type="text" name="username" id="username" class="addInput fl" /></td>
 				</tr>
 				<tr>
 					<td align="right">密码:</td>
-					<td><input type="password" name="password" id="" class="addInput fl" /></td>
+					<td><input type="password" name="password" id="password" class="addInput fl" /></td>
 				</tr>
 				<tr>
 					<td align="right">确认密码:</td>
-					<td><input type="password" name="confirPassword" id="" class="addInput fl" /></td>
+					<td><input type="password" name="confirPassword" id="confirPassword" class="addInput fl" /></td>
 				</tr>
 				<tr>
-					<td align="right">描述:</td>
-					<td><textarea name="describe" id="" class="addArea fl"></textarea></td>
+					<td align="right">描述(200字以内):</td>
+					<td><textarea name="describe" id="describe" class="addArea fl"></textarea></td>
 				</tr>
 				
 				<tr>

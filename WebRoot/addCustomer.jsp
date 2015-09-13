@@ -54,11 +54,23 @@ alert('<%=errorInfo.getDetailMessage() %>');
 <script type="text/javascript">
 	$(document).ready(function () {
     	$("#btnClicked").click(function () {
+    		if($("#customername").val()==""){
+				alert("客户名称不可以为空!");
+				return;
+			}
+			var selected = $("#selectedUser").find("option");
+			if (selected.length <= 0) {
+				alert("请为客户选择账号!");
+				return;
+			}
+			
+			$("#selectedUser").find("option").attr("selected",true);
+	    	
     		$("#formId").submit();
     		return;
     	});
 
-	})
+	});
 </script>
 </head>
 
@@ -90,11 +102,11 @@ alert('<%=errorInfo.getDetailMessage() %>');
 		<div class=" headernav">
 			<div class=" nav">
 				<ul>
-					<li><a href="/servlet/Works?howdo=list">工作纪要</a>
+					<li><a href="/servlet/Works?howdo=list&pageNum=1">工作纪要</a>
 					</li>
-					<li class="navcurrent"><a href="/servlet/Customer?howdo=list">客户管理</a>
+					<li class="navcurrent"><a href="/servlet/Customer?howdo=list&pageNum=1">客户管理</a>
 					</li>
-					<li><a href="/servlet/User?howdo=list">帐号管理</a>
+					<li><a href="/servlet/User?howdo=list&pageNum=1">帐号管理</a>
 					</li>
 				</ul>
 			</div>
@@ -102,13 +114,12 @@ alert('<%=errorInfo.getDetailMessage() %>');
 		<div class="titleDiv">客户添加</div>
 		<div class="titleLineDiv"></div>
 		<div class="addContentDiv">
-		<form action="/servlet/Customer" id="formId">
+		<form action="/servlet/Customer" id="formId" method="post">
 			<input type="hidden" name="howdo" value="add" />
-			<table class="addContentTable" border="0" cellspacing="0"
-				cellpadding="0">
+			<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="120px" align="right">客户:</td>
-					<td><input type="text" name="customername" id="" class="addInput fl" />
+					<td><input type="text" name="customername" id="customername" class="addInput fl" />
 					</td>
 				</tr>
 				<tr>
@@ -119,7 +130,8 @@ alert('<%=errorInfo.getDetailMessage() %>');
 					<td align="right">帐号:</td>
 					<td><table>
 							<tr>
-								<td><select id="selectUser" class="muSelect" multiple="multiple" size="20">
+								<td>
+								<select id="selectUser" class="muSelect" multiple="multiple" size="20">
 								<%
 								List<UserBean> userList = (ArrayList<UserBean>)request.getAttribute("UserList");
 								for (UserBean userBean1 : userList) {
@@ -128,16 +140,18 @@ alert('<%=errorInfo.getDetailMessage() %>');
 								<%
 								}
 								%>
-								</select></td>
-								<td width="60px"><input type="button" value="&gt;&gt;"
-									onclick="allright()" class="mubtn ml10 mt15"> <input
-									type="button" value="&gt;" onclick="right()"
-									class="mubtn ml10 mt15"> <input type="button"
-									value="&lt;" onclick="left()" class="mubtn ml10 mt15">
-									<input type="button" value="&lt;&lt;" onclick="allleft()"
-									class="mubtn ml10 mt15"></td>
-								<td><select id="selectedUser" name="selectedUser" class="muSelect" multiple="multiple" size="20">
-								</select></td>
+								</select>
+								</td>
+								<td width="60px">
+									<input type="button" value="&gt;&gt;" onclick="allright()" class="mubtn ml10 mt15"> 
+									<input type="button" value="&gt;" onclick="right()" class="mubtn ml10 mt15"> 
+									<input type="button" value="&lt;" onclick="left()" class="mubtn ml10 mt15">
+									<input type="button" value="&lt;&lt;" onclick="allleft()" class="mubtn ml10 mt15">
+								</td>
+								<td>
+									<select id="selectedUser" name="selectedUser" class="muSelect" multiple="multiple" size="20">
+									</select>
+								</td>
 							</tr>
 						</table></td>
 				</tr>

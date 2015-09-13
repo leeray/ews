@@ -26,9 +26,17 @@ $(document).ready(function () {
 			alert("二级单位不可以为空!");
 			return;
 		}
+		if($("#erjidanwei").val().length > 200) {
+			alert("二级单位超出200字!");
+			return;
+		}
 		
    		if($("#kehulianxiren").val()==""){
 			alert("客户联系人不可以为空!");
+			return;
+		}
+		if($("#kehulianxiren").val().length > 200){
+			alert("客户联系人超出200字!");
 			return;
 		}
 		
@@ -36,6 +44,10 @@ $(document).ready(function () {
 		var v = $("#lianxifangshi").val();
 		if(v=="") {
 			alert("联系方式不能为空!");
+			return;
+		}
+		if(v.length > 200) {
+			alert("联系方式超出200字!");
 			return;
 		}
 		if(!reg.test(v)) {
@@ -47,6 +59,10 @@ $(document).ready(function () {
 		var lianxi = $("#lianximail").val();
 		if(lianxi=="") {
 			alert("联系邮箱不能为空!");
+			return;
+		}
+		if(lianxi.length > 200) {
+			alert("联系邮箱超出200字!");
 			return;
 		}
 		if(!lianxi_reg.test(lianxi)) {

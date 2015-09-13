@@ -304,7 +304,10 @@ public class Customer extends HttpServlet {
 			}
 			
 			if (result) {
-				forwordCustomerList(request, response);
+				//forwordCustomerList(request, response);
+				RequestDispatcher rd=request.getRequestDispatcher("/servlet/Customer?howdo=list");  
+		        rd.forward(request,response);
+				
 				return;
 			} else {
 				ErrorInfo errorInfo = new ErrorInfo();

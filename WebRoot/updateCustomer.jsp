@@ -58,6 +58,11 @@ alert('<%=errorInfo.getDetailMessage() %>');
 				alert("客户名称不可以为空!");
 				return;
 			}
+			if($("#customername").val().length > 50) {
+				alert("客户名称超出50字!");
+				return;
+			}
+			
 			var selected = $("#selectedUser").find("option");
 			if (selected.length <= 0) {
 				alert("请为客户选择账号!");

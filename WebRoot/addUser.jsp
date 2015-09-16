@@ -138,15 +138,15 @@ if (userBean.getPriv() != 0) {
 			<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="120px" align="right">账号:</td>
-					<td><input type="text" name="username" id="username" class="addInput fl" /></td>
+					<td><input type="text" name="username" id="username" class="addInput fl" autocomplete="off" /></td>
 				</tr>
 				<tr>
 					<td align="right">密码:</td>
-					<td><input type="password" name="password" id="password" class="addInput fl" /></td>
+					<td><input type="password" name="password" id="password" class="addInput fl" autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td align="right">确认密码:</td>
-					<td><input type="password" name="confirPassword" id="confirPassword" class="addInput fl" /></td>
+					<td><input type="password" name="confirPassword" id="confirPassword" class="addInput fl" autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td align="right">描述(200字以内):</td>

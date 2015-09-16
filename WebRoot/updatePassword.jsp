@@ -32,6 +32,22 @@ alert('<%=errorInfo.getDetailMessage() %>');
 <script type="text/javascript">
 	$(document).ready(function () {
     	$("#btnClicked").click(function () {
+			
+			if($("#password").val() == "") {
+				alert("密码不能为空!");
+				return;
+			}
+			
+			if($("#password").val().length > 20 || $("#password").val().length < 6) {
+				alert("密码长度在6-20位之间!");
+				return;
+			}
+			
+			if($("#confirPassword").val()!=$("#password").val()) {
+				alert("两个密码不匹配!");
+				return;
+			}
+    	
     		$("#formId").submit();
     		return;
     	});
@@ -95,20 +111,16 @@ if (userBean1 == null) {
 				cellpadding="0">
 				<tr>
 					<td width="120px" align="right">账号:</td>
-					<td><input type="text" name="username" id="" class="addInput fl" value="<%=userBean1.getName() %>" readonly/></td>
+					<td><input type="text" name="username" id="username" class="addInput fl" value="<%=userBean1.getName() %>" readonly/></td>
 				</tr>
 				<tr>
 					<td align="right">密码:</td>
-					<td><input type="password" name="password" id="" class="addInput fl" value=""/></td>
+					<td><input type="password" name="password" id="password" class="addInput fl" value=""/></td>
 				</tr>
 				<tr>
 					<td align="right">确认密码:</td>
-					<td><input type="password" name="confirPassword" id="" class="addInput fl" value=""/></td>
+					<td><input type="password" name="confirPassword" id="confirPassword" class="addInput fl" value=""/></td>
 				</tr>
-				<!-- tr>
-					<td align="right">描述:</td>
-					<td><textarea name="describe" id="" class="addArea fl"><%=userBean1.getDescribe() %></textarea></td>
-				</tr-->
 				
 				<tr>
 					<td align="right"></td>

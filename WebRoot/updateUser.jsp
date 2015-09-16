@@ -46,19 +46,16 @@ alert('<%=errorInfo.getDetailMessage() %>');
 				return;
 			}
 			
-			if($("#password").val()=="") {
-				alert("密码不能为空!");
-				return;
-			}
-	
-			if($("#password").val().length > 20 || $("#password").val().length < 6) {
-				alert("密码长度在6-20位之间!");
-				return;
-			}
-			
 			if($("#confirPassword").val()!=$("#password").val()) {
 				alert("两个密码不匹配!");
 				return;
+			} else {
+				if($("#password").val()!="" && $("#confirPassword").val()!="") {
+					if($("#password").val().length > 20 || $("#password").val().length < 6) {
+						alert("密码长度在6-20位之间!");
+						return;
+					}
+				}		
 			}
 	
 			if($("#describe").val().length > 200) {

@@ -33,6 +33,7 @@ alert('<%=errorInfo.getDetailMessage() %>');
 <script type="text/javascript">
 $(document).ready(function () {
    	$("#btnClicked").click(function () {
+
    		if($("#erjidanwei").val()=="") {
 			alert("二级单位不可以为空!");
 			return;
@@ -51,7 +52,9 @@ $(document).ready(function () {
 			return;
 		}
 		
-		var reg = /^(1[0-9]{1}[0-9]{1})+\d{8}$/;
+		var mobile_reg = /^(1[0-9]{1}[0-9]{1})+\d{8}$/;
+		var tel_reg = /([0-9]{3,4}-)?[0-9]{7,8}/;
+		
 		var v = $("#lianxifangshi").val();
 		if(v=="") {
 			alert("联系方式不能为空!");
@@ -61,7 +64,9 @@ $(document).ready(function () {
 			alert("联系方式超出200字!");
 			return;
 		}
-		if(!reg.test(v)) {
+		if(mobile_reg.test(v) || tel_reg.test(v)) {
+			
+		} else {
 			alert("联系方式格式错误!");
 			return;
 		}
@@ -90,10 +95,19 @@ $(document).ready(function () {
 			return;
 		}
 		
-		if($("#phonenumber").val()=="" || isNaN($("#phonenumber").val()) || $("#phonenumber").val().length > 20) {
-			alert("800CASE号码不能为空，或者格式错误!");
-			return;
+		var isNeed800 = $("input[name='isphonecall']:checked").val();
+		if(isNeed800 == 1) {
+			if($("#phonenumber").val()=="" || isNaN($("#phonenumber").val())) {
+				alert("800CASE号码不能为空!");
+				return;
+			}
+			var case_reg = /^([0-9-]{6,20})$/;
+			if(!case_reg.test($("#phonenumber").val())) {
+				alert("800CASE格式错误!");
+				return;
+			}
 		}
+		
 		
 		if($("#solution").val()=="") {
 			alert("解决办法不能为空!");

@@ -20,7 +20,7 @@ public class UserDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<UserBean> userList = new ArrayList<UserBean>();
-		String sql = "select * from user";
+		String sql = "select * from user order by id";
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -47,7 +47,7 @@ public class UserDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<UserBean> userList = new ArrayList<UserBean>();
-		String sql = "select * from user limit "+start+","+count;
+		String sql = "select * from user  order by id limit "+start+","+count;
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -146,7 +146,7 @@ public class UserDAO {
 		}
 		
 		List<UserBean> userList = new ArrayList<UserBean>();
-		String sql = "select * from user " + where + " limit "+start+","+count;
+		String sql = "select * from user " + where + " order by id limit "+start+","+count;
 		try {
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -240,10 +240,19 @@ public class UserDAO {
 	}
 	
 	public boolean updateUser(int id, String username, String password, String describe, java.sql.Date date) {
-		try {	
-			String sql = "update user set name = ?, `password` = ?, `describe` = ?, `date` = ? where id = ?";
+		try {
+			Object[] excObj = null;
+			String sql = "";
+			if (password != null && !password.isEmpty()) {
+				sql = "update user set name = ?, `password` = ?, `describe` = ?, `date` = ? where id = ?";
+				excObj = new Object[]{username, password, describe, date, Integer.valueOf(id)};
+			} else {
+				sql = "update user set name = ?, `describe` = ?, `date` = ? where id = ?";
+				excObj = new Object[]{username, describe, date, Integer.valueOf(id)};
+			}
 			
-			int row = this.excute(sql, new Object[]{username, password, describe, date, Integer.valueOf(id)});
+			int row = this.excute(sql, excObj);
+			
 			
 			if (row > 0) { 
 				return true; 

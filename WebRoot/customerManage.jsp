@@ -115,9 +115,8 @@ int pageAll = (Integer)request.getAttribute("pageAll");
 				<tr class="rinTbH">
 					<th scope="col">ID</th>
 					<th scope="col">客户</th>
-					<th scope="col">描述</th>
+					<th scope="col">&nbsp;</th>
 					<th scope="col" width="200px">操作</th>
-
 				</tr>
 				<% 
 				List<CustomerBean> customerList = (ArrayList<CustomerBean>)request.getAttribute("CustomerList");
@@ -128,7 +127,7 @@ int pageAll = (Integer)request.getAttribute("pageAll");
 				<tr>
 					<td><%=i++ %></td>
 					<td><%=customer.getName() %></td>
-					<td></td>
+					<td>&nbsp;</td>
 					<td><div class="operBtn"
 							onclick="pageHref('/servlet/Customer?howdo=edit&id=<%=customer.getId()%>')">编辑</div>
 						<div class="operBtn" onclick="pageHref('/servlet/Customer?howdo=del&id=<%=customer.getId()%>')">删除</div>

@@ -130,7 +130,13 @@ String username = (String)request.getAttribute("username");
 					%></td>
 					<td>
 						<div class="operBtn" onclick="pageHref('/servlet/User?howdo=edit&id=<%=user.getId()%>')">编辑</div>
+						<%
+						if (user.getPriv() != 0) {
+						 %>
 						<div class="operBtn" onclick="pageHref('/servlet/User?howdo=del&id=<%=user.getId()%>')">删除</div>
+						<%
+						}
+						 %>
 					</td>
 				</tr>
 				<%

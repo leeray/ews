@@ -16,7 +16,7 @@ public class CustomerDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<CustomerBean> cusList = new ArrayList<CustomerBean>();
-		String sql = "select * from customer limit "+start+","+count;
+		String sql = "select * from customer order by id limit "+start+","+count;
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -41,7 +41,7 @@ public class CustomerDAO {
 		Connection conn = ConnectionPoolManager.getInstance().getConnection("testPool");
 		
 		List<CustomerBean> cusList = new ArrayList<CustomerBean>();
-		String sql = "select customer.id, customer.name, customer.date from customer inner join user_customer where user_customer.customerid = customer.id and userid="+userid;
+		String sql = "select customer.id, customer.name, customer.date from customer inner join user_customer where user_customer.customerid = customer.id and userid="+userid + " order by id";
 		try { 
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);
@@ -158,7 +158,7 @@ public class CustomerDAO {
 		}
 		
 		List<CustomerBean> cusList = new ArrayList<CustomerBean>();
-		String sql = "select * from customer " + where +" limit "+start+","+count;;
+		String sql = "select * from customer " + where +" order by id limit "+start+","+count;;
 		try {
 			statement = (Statement)conn.createStatement();
 			rs = statement.executeQuery(sql);

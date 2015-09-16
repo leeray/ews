@@ -307,20 +307,10 @@ public class User extends HttpServlet {
 			String password = request.getParameter("password");
 			String confirPassword = request.getParameter("confirPassword");
 			String describe = request.getParameter("describe");
-			if (password==null || confirPassword==null || password.isEmpty() || confirPassword.isEmpty()) {
-				
-				ErrorInfo errorInfo = new ErrorInfo();
-				errorInfo.setDetailMessage("字段不能为空");
-				
-				request.setAttribute("ErrorInfo", errorInfo);
-				
-				RequestDispatcher rd=request.getRequestDispatcher("/servlet/User?howdo=edit&id="+id);  
-		        rd.forward(request,response);
-		        
-		        return;
-			}
 			
-			if (!password.equalsIgnoreCase(confirPassword)) {
+			if (password!=null && !password.isEmpty()
+					&& confirPassword!=null && !confirPassword.isEmpty()
+					&& !password.equalsIgnoreCase(confirPassword)) {
 				
 				ErrorInfo errorInfo = new ErrorInfo();
 				errorInfo.setDetailMessage("密码不相同");

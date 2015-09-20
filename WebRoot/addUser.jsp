@@ -21,18 +21,20 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
+	
     	$("#btnClicked").click(function () {
-    		if($("#username").val()=="") {
+    		var username = $.trim($("#username").val());
+    		if(username=="") {
 				alert("账号不能为空!");
 				return;
 			}
 			
-			if(!(/^[A-Za-z0-9_-]+$/.test($("#username").val()))) {
+			if(!(/^[A-Za-z0-9_-]+$/.test(username))) {
 				alert("账号只能包含大写字母、小写字母和数字!");
 				return;
 			}
 	
-			if($("#username").val().length > 20) {
+			if(username.length > 20) {
 				alert("账号超出20字!");
 				return;
 			}
@@ -56,9 +58,45 @@
 				alert("描述超过200字!");
 				return;
 			}
-    	
+			
+			$("#username").attr("value", username);
+			
+			/* alert("xx1");
+			// 创建Form
+			var form = $('<form></form>');
+			// 设置属性
+			form.attr('action', "/servlet/User");
+			form.attr('method', 'post');
+			form.attr('target', '_self');
+			
+			var howdo = $('<input type="text" name="howdo" value="add"/>');
+    		form.append(howdo);
+    		
+    		var username = $('<input type="text" name="username"/>');
+    		username.attr('value', $("#username").val());
+    		form.append(username);
+    		
+    		var paswd = $('<input type="password" name="password"/>');
+    		paswd.attr('value', $("#password").val());
+    		form.append(paswd);
+    		
+    		var confirPassword = $('<input type="password" name="confirPassword"/>');
+    		confirPassword.attr('value', $("#confirPassword").val());
+    		form.append(confirPassword);
+    		
+    		var describe = $('<input type="text" name="describe" />');
+    		describe.attr('value', $("#describe").val());
+    		form.append(describe);
+    		
+    		alert("xx2");
+    		form.submit();
+    		alert("xx3"); */
+    		
     		$("#formId").submit();
-    		return;
+    		
+    		
+    		
+    		return true;
     	});
 
 	})
@@ -138,15 +176,17 @@ if (userBean.getPriv() != 0) {
 			<table class="addContentTable" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="120px" align="right">账号:</td>
-					<td><input type="text" name="username" id="username" class="addInput fl" autocomplete="off" /></td>
+					<td><input type="text" name="username" id="username" class="addInput fl" autocomplete="off" value=" " /></td>
 				</tr>
 				<tr>
 					<td align="right">密码:</td>
-					<td><input type="password" name="password" id="password" class="addInput fl" autocomplete="off"/></td>
+					<td><input type="password" name="password" id="password" class="addInput fl" autocomplete="off" value=""/></td>
 				</tr>
 				<tr>
 					<td align="right">确认密码:</td>
-					<td><input type="password" name="confirPassword" id="confirPassword" class="addInput fl" autocomplete="off"/></td>
+					<td>
+					<input type="password" name="confirPassword" id="confirPassword" class="addInput fl" autocomplete="off"/>
+					</td>
 				</tr>
 				<tr>
 					<td align="right">描述(200字以内):</td>
